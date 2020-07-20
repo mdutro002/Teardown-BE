@@ -23,36 +23,29 @@ if (process.env.DATABASE_URL) {
     }
   })
   pool.connect()
-} else {
-console.log('posting locally');
-pool = new Pool({
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  port: process.env.PG_PORT,
-  database: process.env.DBNAME
-})
-
-const client = new Client({
-  database: process.env.DBNAME,
-  user: process.env.DBUSER,
-  password: process.env.DBPASSWORD,
-  port: process.env.DBPORT
-})
+  } else {
+  console.log('posting locally');
+  pool = new Pool({
+    user: process.env.DBUSER,
+    password: process.env.PASSWORD,
+    port: process.env.PG_PORT,
+    database: process.env.DBNAME
+  })  
 
 }
 
-pool.connect((err, client, release) => {
-  if (err){
-    return console.error('Error acquiring client', err.stack)
-  }
-  client.query('SELECT NOW()', (err, result) => {
-    release()
-    if (err) {
-      return console.error('Error executing query', err.stack)
-    }
-    console.log(result.rows);
-  })
-});
+// pool.connect((err, client, release) => {
+//   if (err){
+//     return console.error('Error acquiring client', err.stack)
+//   }
+//   client.query('SELECT NOW()', (err, result) => {
+//     release()
+//     if (err) {
+//       return console.error('Error executing query', err.stack)
+//     }
+//     console.log(result.rows);
+//   })
+// });
 
 //API ROUTES
 //ROUTES - GET ALL REVIEWS
