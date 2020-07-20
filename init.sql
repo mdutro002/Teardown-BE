@@ -10,7 +10,7 @@ CREATE TABLE reviews (
   reviewtitle varchar(300),
   reviewbody varchar(2000),
   creatorID INTEGER REFERENCES creators (id)
-  );
+);
 
 INSERT INTO creators (first, last) VALUES ('Madeline', 'BigBrainwater');
 INSERT INTO reviews (site, reviewtitle, reviewbody, creatorID) VALUES ('twitter', 'Big Concerns', 'plaintext password leaks and blue checkmark woes abound', 1);
