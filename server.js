@@ -62,7 +62,7 @@ app.get('/creators', (req, res) => {
   })
 })
 
-//ROUTES - CREATE REVIEW -- NEEDS TESTING
+//ROUTES - CREATE REVIEW
 app.post('/review', (req, res) => {
   client.connect();
   const query = 'INSERT INTO reviews (site, reviewtitle, reviewbody, creatorID) VALUES ($1, $2, $3, $4) RETURNING *';
