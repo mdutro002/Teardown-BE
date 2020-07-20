@@ -25,32 +25,6 @@ if (process.env.DATABASE_URL) {
 
   pool.connect();
 
-  // console.log('posting locally');
-  // pool = new Pool({
-  //   user: process.env.DBUSER,
-  //   password: process.env.PASSWORD,
-  //   port: process.env.PG_PORT,
-  //   database: process.env.DBNAME
-  // })  
-  // client = new Client({
-  //   user: process.env.DBUSER,
-  //   password: process.env.PASSWORD,
-  //   port: process.env.PG_PORT,
-  //   database: process.env.DBNAME
-  // });
-
-  // pool.connect((err, client, release) => {
-  //   if (err){
-  //     return console.error('Error acquiring client', err.stack)
-  //   }
-  //   client.query('SELECT NOW()', (err, result) => {
-  //     if (err) {
-  //       return console.error('Error executing query', err.stack)
-  //     }
-  //     console.log(result.rows);
-  //   })
-  // });
-
 }
 
 
@@ -115,3 +89,33 @@ app.listen(PORT, () => {
 
 //Reference the following guide when working with databases
 //https://www.taniarascia.com/node-express-postgresql-heroku/
+
+/* 
+ LOCAL CONNECT SCRIPTS
+  // console.log('posting locally');
+  // pool = new Pool({
+  //   user: process.env.DBUSER,
+  //   password: process.env.PASSWORD,
+  //   port: process.env.PG_PORT,
+  //   database: process.env.DBNAME
+  // })  
+  // client = new Client({
+  //   user: process.env.DBUSER,
+  //   password: process.env.PASSWORD,
+  //   port: process.env.PG_PORT,
+  //   database: process.env.DBNAME
+  // });
+
+  // pool.connect((err, client, release) => {
+  //   if (err){
+  //     return console.error('Error acquiring client', err.stack)
+  //   }
+  //   client.query('SELECT NOW()', (err, result) => {
+  //     if (err) {
+  //       return console.error('Error executing query', err.stack)
+  //     }
+  //     console.log(result.rows);
+  //   })
+  // });
+
+*/
