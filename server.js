@@ -13,7 +13,6 @@ app.use(express.json());
 const PORT = 3333
 
 //DB CONNECTION
-
 if (process.env.DATABASE_URL) {
   console.log('database');
     pool = new Client({
@@ -31,7 +30,7 @@ if (process.env.DATABASE_URL) {
 
 //API ROUTES
 //ROUTES - GET ALL REVIEWS
-app.get('/', (req, res) => {
+app.get('/', cors(), (req, res) => {
   pool.query('SELECT * FROM reviews', (err, result) => {
     if (err){
       console.log(err)
