@@ -22,12 +22,8 @@ if (process.env.DATABASE_URL) {
       rejectUnauthorized: false
     }
   })
-
   pool.connect();
-
 }
-
-
 
 //API ROUTES
 //ROUTES - GET ALL REVIEWS
@@ -43,7 +39,7 @@ app.get('/', cors(), (req, res) => {
 
 //ROUTES - GET ALL CREATORS
 app.get('/creators', (req, res) => {
-  pool.query('SELECT * FROM creators', (err, result) => {
+  pool.query('SELECT first, last FROM creators', (err, result) => {
     if (err){
       console.log(err)
       throw err
@@ -52,7 +48,7 @@ app.get('/creators', (req, res) => {
   })
 })
 
-//ROUTES - CREATE REVIEW -- NEEDS TESTING
+//ROUTES - CREATE REVIEW 
 app.post('/review', cors(), (req, res) => {
   client.connect();
   const query = 'INSERT INTO reviews (site, reviewtitle, reviewbody, creatorID) VALUES ($1, $2, $3, $4) RETURNING *';
@@ -65,9 +61,10 @@ app.post('/review', cors(), (req, res) => {
 
 //ROUTES - CREATE CREATOR
 app.post('/creators', cors(), (req, res) => {
+  //sanitize and bcrypt password here
   client.connect();
-  const query = 'INSERT INTO creators (first, last) VALUES ($1, $2) RETURNING *';
-  const params = [req.body.firstname, req.body.lastname];
+  const query = 'INSERT INTO creators (first, last, pw) VALUES ($1, $2, $3) RETURNING *';
+  const params = [req.body.firstname, req.body.lastname, req.body.pw];
   client.query(query, params).then(data => {
     res.json(data.rows[0]);
     client.end();
