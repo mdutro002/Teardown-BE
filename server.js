@@ -85,12 +85,23 @@ app.post('/creators', (req, res) => {
 })
 
 //ROUTES - UPDATE REVIEW
+app.puts('/review', (req, res) => {
+  res.send('update review route');
+})
 
 //ROUTES - UPDATE CREATOR
-
+app.puts('/creators', (req, res) => {
+  res.send('update creator route');
+})
 //ROUTES - DELETE REVIEW
+app.delete('/review', (req, res) => {
+  res.send('delete review route')
+})
 
 //ROUTES - DELETE CREATOR
+app.delete('/creators', (req, res) => {
+  res.send('delete creator route')
+})
 
 //LISTENER
 app.listen(PORT, () => {
