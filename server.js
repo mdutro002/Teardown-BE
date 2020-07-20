@@ -2,7 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 const app = express();
-const {Pool, Client} = require('pg');
+const Pool = require('pg').Pool
+const {Client} = require('pg');
 
 //MIDDLEWARE
 app.set('views', __dirname + '/views');
@@ -12,11 +13,23 @@ app.use(express.json());
 const PORT = process.env.PORT || 3333
 
 //DB CONNECTION
-const pool = new Pool({ 
-  database: process.env.DBNAME,
-  user: process.env.DBUSER,
-  password: process.env.DBPASSWORD,
-  port: process.env.DBPORT
+
+if (process.env.DATABASE_URL) {
+  console.log('database');
+    pool = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  })
+  pool.connect()
+} else {
+console.log('posting locally');
+pool = new Pool({
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  port: process.env.PG_PORT,
+  database: process.env.DBNAME
 })
 
 const client = new Client({
@@ -25,6 +38,8 @@ const client = new Client({
   password: process.env.DBPASSWORD,
   port: process.env.DBPORT
 })
+
+}
 
 pool.connect((err, client, release) => {
   if (err){
