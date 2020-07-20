@@ -85,6 +85,7 @@ app.post('/creators', cors(), (req, res) => {
 //LISTENER
 app.listen(PORT, () => {
   console.log("listening on ", PORT);
+  console.log(process.env.DATABASE_URL);
 })
 
 //Reference the following guide when working with databases
