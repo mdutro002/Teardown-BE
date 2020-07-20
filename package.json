@@ -1,0 +1,28 @@
+{
+  "name": "theteardown",
+  "version": "1.0.0",
+  "description": "Platform to review apps and websites for privacy concerns",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdutro002/theTeardown.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdutro002/theTeardown/issues"
+  },
+  "homepage": "https://github.com/mdutro002/theTeardown#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "create-react-app": "^3.4.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "method-override": "^3.0.0",
+    "pg": "^8.3.0"
+  }
+}
