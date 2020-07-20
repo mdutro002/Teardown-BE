@@ -10,22 +10,22 @@ app.set('views', __dirname + '/views');
 require('dotenv').config();
 app.use(express.json());
 
-const PORT = 3333
+const PORT = process.env.PORT || 3333
 let pool = ''
 
 //DB CONNECTION
-// if (process.env.DATABASE_URL) {
-//   console.log('database');
-//     pool = new Client({
-//     connectionString: process.env.DATABASE_URL,
-//     ssl: {
-//       rejectUnauthorized: false
-//     }
-//   })
+if (process.env.DATABASE_URL) {
+  console.log('database');
+    pool = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  })
 
-//   pool.connect();
+  pool.connect();
 
-// }
+}
 
 
 
