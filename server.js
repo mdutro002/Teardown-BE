@@ -11,6 +11,7 @@ require('dotenv').config();
 app.use(express.json());
 
 const PORT = 3333
+let pool = ''
 
 //DB CONNECTION
 if (process.env.DATABASE_URL) {
@@ -52,7 +53,7 @@ app.get('/creators', (req, res) => {
 })
 
 //ROUTES - CREATE REVIEW -- NEEDS TESTING
-app.post('/review', (req, res) => {
+app.post('/review', cors(), (req, res) => {
   client.connect();
   const query = 'INSERT INTO reviews (site, reviewtitle, reviewbody, creatorID) VALUES ($1, $2, $3, $4) RETURNING *';
   const params = [req.body.site, req.body.reviewtitle, req.body.reviewbody, req.body.creatorID]
@@ -63,7 +64,7 @@ app.post('/review', (req, res) => {
 })
 
 //ROUTES - CREATE CREATOR
-app.post('/creators', (req, res) => {
+app.post('/creators', cors(), (req, res) => {
   client.connect();
   const query = 'INSERT INTO creators (first, last) VALUES ($1, $2) RETURNING *';
   const params = [req.body.firstname, req.body.lastname];
