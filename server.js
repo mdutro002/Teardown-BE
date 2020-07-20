@@ -45,7 +45,6 @@ if (process.env.DATABASE_URL) {
       return console.error('Error acquiring client', err.stack)
     }
     client.query('SELECT NOW()', (err, result) => {
-      release()
       if (err) {
         return console.error('Error executing query', err.stack)
       }
