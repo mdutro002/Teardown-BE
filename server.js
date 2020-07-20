@@ -22,7 +22,9 @@ if (process.env.DATABASE_URL) {
       rejectUnauthorized: false
     }
   })
-  pool.connect()
+
+  pool.connect();
+
   } else {
   console.log('posting locally');
   pool = new Pool({
@@ -31,21 +33,29 @@ if (process.env.DATABASE_URL) {
     port: process.env.PG_PORT,
     database: process.env.DBNAME
   })  
+  client = new Client({
+    user: process.env.DBUSER,
+    password: process.env.PASSWORD,
+    port: process.env.PG_PORT,
+    database: process.env.DBNAME
+  });
+
+  pool.connect((err, client, release) => {
+    if (err){
+      return console.error('Error acquiring client', err.stack)
+    }
+    client.query('SELECT NOW()', (err, result) => {
+      release()
+      if (err) {
+        return console.error('Error executing query', err.stack)
+      }
+      console.log(result.rows);
+    })
+  });
 
 }
 
-// pool.connect((err, client, release) => {
-//   if (err){
-//     return console.error('Error acquiring client', err.stack)
-//   }
-//   client.query('SELECT NOW()', (err, result) => {
-//     release()
-//     if (err) {
-//       return console.error('Error executing query', err.stack)
-//     }
-//     console.log(result.rows);
-//   })
-// });
+
 
 //API ROUTES
 //ROUTES - GET ALL REVIEWS
